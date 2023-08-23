@@ -102,6 +102,10 @@ export class Argv {
         return this.map.get("quiet") ?? false;
     }
 
+    get shell (): boolean {
+        return this.map.get("shell") ?? false;
+    }
+
     get umask (): boolean {
         return this.map.get("umask") ?? true;
     }

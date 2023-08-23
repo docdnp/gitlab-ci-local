@@ -262,7 +262,7 @@ export class Job {
 
     get imageName (): string | null {
         const image = this.jobData["image"];
-        if (!image) return null;
+        if (this.argv.shell || !image) return null;
         const expanded = Utils.expandVariables(this._variables);
         const imageName = Utils.expandText(image.name, expanded);
         return imageName.includes(":") ? imageName : `${imageName}:latest`;

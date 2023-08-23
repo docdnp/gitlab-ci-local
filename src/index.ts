@@ -152,6 +152,11 @@ process.on("SIGINT", (_: string, code: number) => {
             description: "Enable artifact isolation for shell-executor jobs",
             requiresArg: false,
         })
+        .option("shell", {
+            type: "boolean",
+            description: "Execute every job in a local shell environment.",
+            requiresArg: false,
+        })
         .option("mount-cache", {
             type: "boolean",
             description: "Enable docker mount based caching",

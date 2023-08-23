@@ -154,7 +154,7 @@ process.on("SIGINT", (_: string, code: number) => {
         })
         .option("shell", {
             type: "boolean",
-            description: "Execute every job in a local shell environment.",
+            description: "Execute every job in a local shell environment (enforces shell-isolation)",
             requiresArg: false,
         })
         .option("mount-cache", {

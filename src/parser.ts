@@ -198,18 +198,20 @@ export class Parser {
         const fileSplitClone = fileSplit.slice();
 
         let interactiveMatch = null;
+        let neverShellMatch = null;
         let descriptionMatch = null;
         let injectSSHAgent = null;
         let noArtifactsToSourceMatch = null;
         let index = 0;
         for (const line of fileSplit) {
             interactiveMatch = !interactiveMatch ? /#\s?@\s?[Ii]nteractive/.exec(line) : interactiveMatch;
+            neverShellMatch = !neverShellMatch ? /#\s?@\s?[Nn]ever[Ss]hell/.exec(line) : neverShellMatch;
             injectSSHAgent = !injectSSHAgent ? /#\s?@\s?[Ii]njectSSHAgent/.exec(line) : injectSSHAgent;
             noArtifactsToSourceMatch = !noArtifactsToSourceMatch ? /#\s?@\s?NoArtifactsToSource/i.exec(line) : noArtifactsToSourceMatch;
             descriptionMatch = !descriptionMatch ? /#\s?@\s?[Dd]escription (?<description>.*)/.exec(line) : descriptionMatch;
 
             const jobMatch = /\w:/.exec(line);
-            if (jobMatch && (interactiveMatch || descriptionMatch || injectSSHAgent || noArtifactsToSourceMatch)) {
+            if (jobMatch && (interactiveMatch || descriptionMatch || injectSSHAgent || noArtifactsToSourceMatch || neverShellMatch)) {
                 if (interactiveMatch) {
                     fileSplitClone.splice(index + 1, 0, "  interactive: true");
                     index++;
@@ -226,7 +228,12 @@ export class Parser {
                     fileSplitClone.splice(index + 1, 0, `  description: ${descriptionMatch?.groups?.description ?? ""}`);
                     index++;
                 }
+                if (neverShellMatch) {
+                    fileSplitClone.splice(index + 1, 0, `  neverShell: true`);
+                    index++;
+                }
                 interactiveMatch = null;
+                neverShellMatch = null;
                 descriptionMatch = null;
                 injectSSHAgent = null;
                 noArtifactsToSourceMatch = null;

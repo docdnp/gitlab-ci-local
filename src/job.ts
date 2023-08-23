@@ -262,7 +262,7 @@ export class Job {
 
     get imageName (): string | null {
         const image = this.jobData["image"];
-        if (this.argv.shell || !image) return null;
+        if (this.argv.shell && ! this.neverShell || !image) return null;
         const expanded = Utils.expandVariables(this._variables);
         const imageName = Utils.expandText(image.name, expanded);
         return imageName.includes(":") ? imageName : `${imageName}:latest`;
@@ -321,6 +321,10 @@ export class Job {
 
     get interactive (): boolean {
         return this.jobData["interactive"] || false;
+    }
+
+    get neverShell (): boolean {
+        return this.jobData["neverShell"] || false;
     }
 
     get injectSSHAgent (): boolean {

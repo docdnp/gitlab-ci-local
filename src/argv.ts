@@ -159,7 +159,7 @@ export class Argv {
     }
 
     get shellIsolation (): boolean {
-        return this.map.get("shellIsolation") ?? false;
+        return (this.map.get("shell") ?? false) || (this.map.get("shellIsolation") ?? false);
     }
 
     get fetchIncludes (): boolean {

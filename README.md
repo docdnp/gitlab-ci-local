@@ -338,6 +338,22 @@ A global configuration is possible when setting the following flag
 gitlab-ci-local --no-artifacts-to-source
 ```
 
+#### The `@NeverShell` decorator
+
+Prevent a job being enforced to run in a pure shell environment.
+Enforcing shell execution is achieved by the CLI argument `--shell`.
+
+```yml
+# @NeverShell
+docker-job:
+  image: any-image:latest
+  rules:
+    - if: $GITLAB_CI == 'false'
+      when: manual
+  script:
+    - docker run -it debian bash
+```
+
 ### Includes
 
 Includes from external sources are only fetched once. Use `--fetch-includes` to invoke an external fetching routine.

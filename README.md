@@ -1,4 +1,4 @@
-Tired of pushing to test your .gitlab-ci.yml?
+# Tired of pushing to test your .gitlab-ci.yml?
 
 Run gitlab pipelines locally as shell executor or docker executor.
 
@@ -22,28 +22,28 @@ Get rid of all those dev specific shell scripts and make files.
 ## Table of contents
 
 * [Examples](./examples)
-    * [docker-compose-nodejs](./examples/docker-compose-nodejs)
-    * [docker-swarm-php](./examples/docker-swarm-php)
-    * [docker-in-docker-build](./examples/docker-in-docker-build)
+  * [docker-compose-nodejs](./examples/docker-compose-nodejs)
+  * [docker-swarm-php](./examples/docker-swarm-php)
+  * [docker-in-docker-build](./examples/docker-in-docker-build)
 * [Installation](#installation)
 * [Convenience](#convenience)
-    * [CLI options via shell](#cli-options-via-shell)
-    * [DotEnv file](#dotenv-file)
-    * [Bash alias](#bash-alias)
-    * [Tab completion](#tab-completion)
-    * [Listing jobs](#list-pipeline-jobs)
+  * [CLI options via shell](#cli-options-via-shell)
+  * [DotEnv file](#dotenv-file)
+  * [Bash alias](#bash-alias)
+  * [Tab completion](#tab-completion)
+  * [Listing jobs](#list-pipeline-jobs)
 * [Quirks](#quirks)
-    * [Tracked Files](#tracked-files)
-    * [Local Only](#local-only)
-    * [Home File Variables](#home-file-variables)
-    * [Remote File Variables](#remote-file-variables)
-    * [Project File Variables](#project-file-variables)
-    * [Decorators](#decorators)
-    * [Includes](#includes)
-    * [Artifacts](#artifacts)
+  * [Tracked Files](#tracked-files)
+  * [Local Only](#local-only)
+  * [Home File Variables](#home-file-variables)
+  * [Remote File Variables](#remote-file-variables)
+  * [Project File Variables](#project-file-variables)
+  * [Decorators](#decorators)
+  * [Includes](#includes)
+  * [Artifacts](#artifacts)
 * [Development](#development)
-    * [Scripts](#scripts)
-    * [Package binaries](#package-binaries)
+  * [Scripts](#scripts)
+  * [Package binaries](#package-binaries)
 
 ## Installation
 
@@ -79,7 +79,7 @@ If you change it in these commands you must also change it in `/etc/apt/sources.
 
 ### Macos
 
-*bash version must be above or equal 4.x.x*
+#### bash version must be above or equal 4.x.x
 
 ```bash
 brew install gitlab-ci-local
@@ -87,8 +87,8 @@ brew install gitlab-ci-local
 
 ### Windows (Git bash)
 
-- Install [gitbash](https://git-scm.com/downloads)
-- Install [rsync](https://prasaz.medium.com/add-rsync-to-windows-git-bash-f42736bae1b3)
+* Install [gitbash](https://git-scm.com/downloads)
+* Install [rsync](https://prasaz.medium.com/add-rsync-to-windows-git-bash-f42736bae1b3)
 
 Download and put binary in `C:\Program Files\Git\mingw64\bin`
 
@@ -102,7 +102,7 @@ Executing `gitlab-ci-local` with `--variable MSYS_NO_PATHCONV=1` can be useful i
 
 ### CLI options via shell
 
-```
+```bash
 # Overrides .gitlab-ci.yml as the default git ci/cd file
 export GCL_NEEDS='true' >> ~/.bashrc
 export GCL_FILE='.gitlab-ci-local.yml' >> ~/.bashrc
@@ -113,7 +113,7 @@ export GLC_VARIABLES="IMAGE=someimage SOMEOTHERIMAGE=someotherimage"
 
 Add a `.gitlab-ci-local-env` file to the current working directory or a `.env` file in `$HOME/.gitlab-ci-local`
 
-```
+```bash
 # Overrides .gitlab-ci.yml as the default git ci/cd file
 FILE=doctor-strange.yml # --file
 
